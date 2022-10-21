@@ -85,12 +85,13 @@ const prevBtn = document.querySelector('.prev');
 // funzione per scorrere le slide dal bottone 'next'
 function next() {
 
-    const image = document.querySelector('img');
+    const image = document.querySelectorAll('.slides > img');
     // console.log(image)
     const currentImage = image[imageActive];
-    const title = document.querySelector('h2');
+    // console.log(currentImage)
+    const title = document.querySelectorAll('h2');
     const curretTitle = title[imageActive];
-    const text = document.querySelector('h5');
+    const text = document.querySelectorAll('h5');
     const currentText = text[imageActive];
 
     removeClass(currentImage, curretTitle, currentText);
@@ -108,15 +109,15 @@ function next() {
 // funzione per scorrere le slide dal bottone 'prev'
 function prev() {
 
-    const image = document.querySelector('img');
+    const image = document.querySelectorAll('img');
     const currentImage = image[imageActive];
-    const title = document.querySelector('h2');
+    const title = document.querySelectorAll('h2');
     const currentTitle = title[imageActive];
-    const text = document.querySelector('h5');
+    const text = document.querySelectorAll('h5');
     const currentText = text[imageActive];
 
     removeClass(currentImage, currentTitle, currentText);
-    imageActive++;
+    imageActive--;
 
     if (imageActive === -1) {
         imageActive = 4;
