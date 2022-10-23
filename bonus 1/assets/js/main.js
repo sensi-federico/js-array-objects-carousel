@@ -111,7 +111,7 @@ function next() {
 
     imageActive++;
 
-    if (imageActive=== 5) {
+    if (imageActive === 5) {
         imageActive = 0;
     }
 
@@ -128,7 +128,7 @@ function prev() {
     const currentTitle = title[imageActive];
     const text = document.querySelectorAll('h5');
     const currentText = text[imageActive];
-    const thumb = document.querySelectorAll('.slides img');
+    const thumb = document.querySelectorAll('.thumbnails img');
     const currentThumb = thumb[imageActive];
 
     removeClass(currentImage, currentTitle, currentText, currentThumb);
