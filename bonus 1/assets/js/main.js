@@ -42,7 +42,7 @@ const slides = [
 
 
 
-// Milestone 1:
+// Milestone 1: DONE
 // Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
 // Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
 
@@ -57,6 +57,7 @@ for (let i = 0; i < slides.length; i++) {
     slidesEl.insertAdjacentHTML('beforeend', markUp)
     title(i, elementSl);
     text(i, elementSl);
+    thumbnail(i, elementSl);
 }
 
 
@@ -73,7 +74,17 @@ function text(i, element) {
     const textMarkup = `<h5 class="${i === imageActive ? 'active' : ''}">${element.text}</h5>`;
     textEl.insertAdjacentHTML('beforeend', textMarkup);
 }
-// Milestone 2:
+
+// BONUS 1 (opzionale):
+// Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
+
+function thumbnail(i, element) {
+    const thumbEl = document.querySelector('.thumbnails');
+    const thumbMarkup = `<img class="${i === imageActive ? 'active-thumb' : ''}" src="${element.image}"></img>`;
+    thumbEl.insertAdjacentHTML('beforeend', thumbMarkup);
+}
+
+// Milestone 2: DONE
 // Aggiungere il ciclo infinito del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca 
 // la freccia verso destra, la miniatura che deve attivarsi sarà l'ultima 
 // e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sinistra.
@@ -85,7 +96,7 @@ const prevBtn = document.querySelector('.prev');
 // funzione per scorrere le slide dal bottone 'next'
 function next() {
 
-    const image = document.querySelectorAll('img');
+    const image = document.querySelectorAll('.slides img');
     // console.log(image)
     const currentImage = image[imageActive];
     // console.log(currentImage)
@@ -93,8 +104,10 @@ function next() {
     const curretTitle = title[imageActive];
     const text = document.querySelectorAll('h5');
     const currentText = text[imageActive];
+    const thumb = document.querySelectorAll('.thumbnails img')
+    const currentThumb = thumb[imageActive];
 
-    removeClass(currentImage, curretTitle, currentText);
+    removeClass(currentImage, curretTitle, currentText, currentThumb);
 
     imageActive++;
 
@@ -102,62 +115,60 @@ function next() {
         imageActive = 0;
     }
 
-    addClass(image, title, text);
+    addClass(image, title, text, thumb);
 
 }
 
 // funzione per scorrere le slide dal bottone 'prev'
 function prev() {
 
-    const image = document.querySelectorAll('img');
+    const image = document.querySelectorAll('.slides img');
     const currentImage = image[imageActive];
     const title = document.querySelectorAll('h2');
     const currentTitle = title[imageActive];
     const text = document.querySelectorAll('h5');
     const currentText = text[imageActive];
+    const thumb = document.querySelectorAll('.slides img');
+    const currentThumb = thumb[imageActive];
 
-    removeClass(currentImage, currentTitle, currentText);
+    removeClass(currentImage, currentTitle, currentText, currentThumb);
     imageActive--;
 
     if (imageActive === -1) {
         imageActive = 4;
     }
 
-    addClass(image, title, text);
+    addClass(image, title, text, thumb);
 }
 
 // funzione per aggiungere la classe ai 3 elementi  
 //                                                        (UTILIZZABILE BONUS MINIATURE?)
 
 
-function addClass(img, title, text) {
+function addClass(img, title, text, thumb) {
 
     const nextImg = img[imageActive];
     const nextTitle = title[imageActive];
     const nextText = text[imageActive];
+    const nextthumb = thumb[imageActive];
 
     nextImg.classList.add('active');
     nextTitle.classList.add('active');
     nextText.classList.add('active');
+    nextthumb.classList.add('active-thumb');
 }
 
 // copio la funzione e la traformo in 'remove'
 
-function removeClass(img, title, text) {
+function removeClass(img, title, text, thumb) {
 
     img.classList.remove('active');
     title.classList.remove('active');
     text.classList.remove('active');
+    thumb.classList.remove('active-thumb');
 }
 
 
-
-
-
-
-
-// BONUS 1 (opzionale):
-// Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
 
 
 // BONUS 2  (opzionale):
