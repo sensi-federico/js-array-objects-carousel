@@ -85,7 +85,7 @@ const prevBtn = document.querySelector('.prev');
 // funzione per scorrere le slide dal bottone 'next'
 function next() {
 
-    const image = document.querySelectorAll('.slides > img');
+    const image = document.querySelectorAll('img');
     // console.log(image)
     const currentImage = image[imageActive];
     // console.log(currentImage)
@@ -158,6 +158,8 @@ function removeClass(img, title, text) {
 
 // BONUS 1 (opzionale):
 // Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
+
+
 // BONUS 2  (opzionale):
 // Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
 // BONUS 3  (opzionale):

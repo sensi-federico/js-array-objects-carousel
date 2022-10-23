@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .active {
     display: block;
 }
@@ -14,16 +20,30 @@ img {
     width: 800px;
     display: flex;
     justify-content: end;
+    position: relative;
 }
 
 .next, .prev {
-    height: 30px;
     transform: rotate(-90deg);
+    position: absolute;
+    top: 50%;
+    border-radius: 50%;
+    background-color: gray;
+    padding: 1.5rem;
 }
+
+.next {
+    left: 95%;
+}
+.prev {
+    right: 95%;
+}
+
 
 h2, h5{
     display: none;
 }
+
 
 .title, .text {
     max-width: 800px;
