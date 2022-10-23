@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Carosello</title>
+    <title>Carosello 3</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://kit.fontawesome.com/641e4c79bb.js" crossorigin="anonymous"></script>
@@ -14,15 +14,18 @@
 <body class="bg-dark">
 
     <header id="site_header">
-        <h1 class="text-center text-uppercase my-5 text-warning">My carousel</h1>
+        <h1 class="text-center text-uppercase mt-5 text-white">My carousel</h1>
     </header>
     
     <main id="site_main">
         <div class="container d-flex justify-content-center align-items-center">
+            <div class="controls d-flex flex-column">
+                <button class="btn btn-secondary me-4 mb-3 start">Start</button>
+                <button class="btn btn-secondary me-4 mb-3 reverse">Reverse</button>
+                <button class="btn btn-danger me-4 stop">Stop</button>
+            </div>
             <div class="slides">
                 <!-- <img class="active" src="./assets/img/01.webp" alt=""> -->
-                <button class="btn btn-primary next" onclick="next()"><i class="fa-solid fa-chevron-down fa-xl"></i></button>
-                <button class="btn btn-primary prev" onclick="prev()"><i class="fa-solid fa-chevron-up fa-xl"></i></button>
             </div>
             <div class="thumbnails"></div>
         </div>

@@ -40,12 +40,9 @@ const slides = [
 ];
 
 
-
-
 // Milestone 1: DONE
 // Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
 // Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
-
 
 const slidesEl = document.querySelector('.slides');
 
@@ -59,7 +56,6 @@ for (let i = 0; i < slides.length; i++) {
     text(i, elementSl);
     thumbnail(i, elementSl);
 }
-
 
 // funzione per generare titolo immagine attiva
 function title(i, element) {
@@ -75,7 +71,7 @@ function text(i, element) {
     textEl.insertAdjacentHTML('beforeend', textMarkup);
 }
 
-// BONUS 1 (opzionale):
+// BONUS 1 (opzionale): DONE
 // Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
 
 function thumbnail(i, element) {
@@ -89,14 +85,37 @@ function thumbnail(i, element) {
 // la freccia verso destra, la miniatura che deve attivarsi sarà l'ultima 
 // e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sinistra.
 
-const nextBtn = document.querySelector('.next');
-const prevBtn = document.querySelector('.prev');
+const startBtn = document.querySelector('.start');
+const reverseBtn = document.querySelector('.reverse');
+const stopBtn = document.querySelector('.stop');
 
 
-// funzione per scorrere le slide dal bottone 'next'
+
+// BONUS 2  (opzionale): DONE
+// Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
+
+// BONUS 3  (opzionale):
+// Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+
 let time = 0;
-const intervalId = setInterval(timer, 3000);
-function timer() {
+
+startBtn.addEventListener('click', startSlide);
+
+function startSlide(){
+    const intervalId = setInterval(start, 1000);
+    startBtn.style.display = 'none';
+    reverseBtn.style.display = 'block';
+
+}
+
+reverseBtn.addEventListener('click', function(){
+    const intervalId = setInterval(reverse, 1000);
+    reverseBtn.style.display = 'none';
+    startBtn.style.display = 'block';
+    // startBtn.removeEventListener(startSlide);
+})
+
+function start() {
 
     if(time % 3 === 0){
         const image = document.querySelectorAll('.slides img');
@@ -125,31 +144,82 @@ function timer() {
 
 }
 
+function reverse() {
+
+    if(time % 3 === 0){
+        const image = document.querySelectorAll('.slides img');
+        // console.log(image)
+        const currentImage = image[imageActive];
+        // console.log(currentImage)
+        const title = document.querySelectorAll('h2');
+        const curretTitle = title[imageActive];
+        const text = document.querySelectorAll('h5');
+        const currentText = text[imageActive];
+        const thumb = document.querySelectorAll('.thumbnails img')
+        const currentThumb = thumb[imageActive];
+    
+        removeClass(currentImage, curretTitle, currentText, currentThumb);
+    
+        imageActive--;
+    
+        if (imageActive === -1) {
+            imageActive = 4;
+        }
+    
+        addClass(image, title, text, thumb);
+    } else {
+        time++;
+    }
+
+}
+
+function next() {
+
+    goOrStay = 1;
+    const image = document.querySelectorAll('.slides img');
+    const currentImage = image[imageActive];
+    const title = document.querySelectorAll('h2');
+    const currentTitle = title[imageActive];
+    const text = document.querySelectorAll('h5');
+    const currentText = text[imageActive];
+    const thumb = document.querySelectorAll('.thumbnails img');
+    const currentThumb = thumb[imageActive];
+
+    removeClass(currentImage, currentTitle, currentText, currentThumb);
+    imageActive++;
+
+    if (imageActive === 5) {
+        imageActive = 0;
+    }
+
+    addClass(image, title, text, thumb);
+}
+
+
 // funzione per scorrere le slide dal bottone 'prev'
-// function prev() {
+function prev() {
 
-//     const image = document.querySelectorAll('.slides img');
-//     const currentImage = image[imageActive];
-//     const title = document.querySelectorAll('h2');
-//     const currentTitle = title[imageActive];
-//     const text = document.querySelectorAll('h5');
-//     const currentText = text[imageActive];
-//     const thumb = document.querySelectorAll('.thumbnails img');
-//     const currentThumb = thumb[imageActive];
+    goOrStay = 0;
+    const image = document.querySelectorAll('.slides img');
+    const currentImage = image[imageActive];
+    const title = document.querySelectorAll('h2');
+    const currentTitle = title[imageActive];
+    const text = document.querySelectorAll('h5');
+    const currentText = text[imageActive];
+    const thumb = document.querySelectorAll('.thumbnails img');
+    const currentThumb = thumb[imageActive];
 
-//     removeClass(currentImage, currentTitle, currentText, currentThumb);
-//     imageActive--;
+    removeClass(currentImage, currentTitle, currentText, currentThumb);
+    imageActive--;
 
-//     if (imageActive === -1) {
-//         imageActive = 4;
-//     }
+    if (imageActive === -1) {
+        imageActive = 4;
+    }
 
-//     addClass(image, title, text, thumb);
-// }
+    addClass(image, title, text, thumb);
+}
 
 // funzione per aggiungere la classe ai 3 elementi  
-//                                                        (UTILIZZABILE BONUS MINIATURE?)
-
 
 function addClass(img, title, text, thumb) {
 
@@ -174,13 +244,6 @@ function removeClass(img, title, text, thumb) {
     thumb.classList.remove('active-thumb');
 }
 
-
-
-
-// BONUS 2  (opzionale):
-// Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
-// BONUS 3  (opzionale):
-// Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
 
 
 
