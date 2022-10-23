@@ -94,52 +94,58 @@ const prevBtn = document.querySelector('.prev');
 
 
 // funzione per scorrere le slide dal bottone 'next'
-function next() {
+let time = 0;
+const intervalId = setInterval(timer, 3000);
+function timer() {
 
-    const image = document.querySelectorAll('.slides img');
-    // console.log(image)
-    const currentImage = image[imageActive];
-    // console.log(currentImage)
-    const title = document.querySelectorAll('h2');
-    const curretTitle = title[imageActive];
-    const text = document.querySelectorAll('h5');
-    const currentText = text[imageActive];
-    const thumb = document.querySelectorAll('.thumbnails img')
-    const currentThumb = thumb[imageActive];
-
-    removeClass(currentImage, curretTitle, currentText, currentThumb);
-
-    imageActive++;
-
-    if (imageActive=== 5) {
-        imageActive = 0;
+    if(time % 3 === 0){
+        const image = document.querySelectorAll('.slides img');
+        // console.log(image)
+        const currentImage = image[imageActive];
+        // console.log(currentImage)
+        const title = document.querySelectorAll('h2');
+        const curretTitle = title[imageActive];
+        const text = document.querySelectorAll('h5');
+        const currentText = text[imageActive];
+        const thumb = document.querySelectorAll('.thumbnails img')
+        const currentThumb = thumb[imageActive];
+    
+        removeClass(currentImage, curretTitle, currentText, currentThumb);
+    
+        imageActive++;
+    
+        if (imageActive === 5) {
+            imageActive = 0;
+        }
+    
+        addClass(image, title, text, thumb);
+    } else {
+        time++;
     }
-
-    addClass(image, title, text, thumb);
 
 }
 
 // funzione per scorrere le slide dal bottone 'prev'
-function prev() {
+// function prev() {
 
-    const image = document.querySelectorAll('.slides img');
-    const currentImage = image[imageActive];
-    const title = document.querySelectorAll('h2');
-    const currentTitle = title[imageActive];
-    const text = document.querySelectorAll('h5');
-    const currentText = text[imageActive];
-    const thumb = document.querySelectorAll('.slides img');
-    const currentThumb = thumb[imageActive];
+//     const image = document.querySelectorAll('.slides img');
+//     const currentImage = image[imageActive];
+//     const title = document.querySelectorAll('h2');
+//     const currentTitle = title[imageActive];
+//     const text = document.querySelectorAll('h5');
+//     const currentText = text[imageActive];
+//     const thumb = document.querySelectorAll('.thumbnails img');
+//     const currentThumb = thumb[imageActive];
 
-    removeClass(currentImage, currentTitle, currentText, currentThumb);
-    imageActive--;
+//     removeClass(currentImage, currentTitle, currentText, currentThumb);
+//     imageActive--;
 
-    if (imageActive === -1) {
-        imageActive = 4;
-    }
+//     if (imageActive === -1) {
+//         imageActive = 4;
+//     }
 
-    addClass(image, title, text, thumb);
-}
+//     addClass(image, title, text, thumb);
+// }
 
 // funzione per aggiungere la classe ai 3 elementi  
 //                                                        (UTILIZZABILE BONUS MINIATURE?)
